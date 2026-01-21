@@ -586,7 +586,6 @@ async function loadRuntimeSettings() {
   const envResult = loadSettingsFromEnv();
   runtimeSettings = { ...runtimeSettings, ...envResult.settings };
   Object.assign(settingSources, envResult.sources);
-  console.log(runtimeSettings);
 
   // Layer 2: Apply file settings (highest precedence)
   try {
