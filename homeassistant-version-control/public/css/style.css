@@ -4764,6 +4764,10 @@ body:not(.dark-mode) #backupList .list-item {
     overflow-y: auto;
   }
 
+  .content > .panel:first-of-type {
+    max-height: 40vh;
+  }
+
   .diff-container {
     grid-template-columns: 1fr;
   }
