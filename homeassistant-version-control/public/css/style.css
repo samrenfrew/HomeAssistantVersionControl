@@ -4634,6 +4634,15 @@ body:not(.dark-mode) .diff-line {
   height: 30px;
 }
 
+media screen and (max-width: 500px){
+  .diff-line-empty {
+    display:none;
+  }
+  .diff-cell-left .diff-line-context {
+    display:none;
+  }
+}
+
 .diff-line-context {
   background: rgba(25, 25, 25, 0.55);
   color: rgba(148, 163, 184, 0.6);
@@ -4800,10 +4809,10 @@ body:not(.dark-mode) #backupList .list-item {
 }
 
 @media (max-width: 500px) {
-  .header {
+  /* .header {
     flex-direction: column;
     align-items: flex-start;
-  }
+  } */
 
   .header .btn-secondary {
     width: 100%;
@@ -4814,7 +4823,7 @@ body:not(.dark-mode) #backupList .list-item {
   }
 
   .panel-header-actions {
-    width: 100%;
+    /* width: 100%; */
   }
 
   .panel-header-actions .select {
