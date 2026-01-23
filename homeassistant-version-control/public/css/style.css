@@ -170,6 +170,10 @@ html.theme-transition-suppress * {
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 500px){
+    gap: 10px;
+  }
 }
 
 .logo {
@@ -765,7 +769,7 @@ input:checked+.toggle-slider:before {
 
 /* === Buttons === */
 .btn-primary,
-.btn-secondary {
+.btn-secondary, .btn-danger {
   padding: 14px 28px;
   border-radius: 12px;
   font-weight: 500;
@@ -793,6 +797,10 @@ input:checked+.toggle-slider:before {
   background-color: rgba(35, 35, 35, 0.6);
   color: #D3D3D3;
   border: 1px solid rgba(231, 229, 228, 0.1);
+}
+
+.btn-danger {
+  background: red;
 }
 
 body:not(.dark-mode) .btn-secondary {
@@ -3419,7 +3427,7 @@ body:not(.dark-mode) .diff-column h3 {
   line-height: 1.5;
   padding: clamp(10px, 2vh, 20px);
   overflow-x: auto;
-  white-space: pre;
+  /* white-space: pre; */
   flex: 1;
   margin: 0;
   border-radius: 0 0 16px 16px;
@@ -4867,7 +4875,7 @@ body:not(.dark-mode) #backupList .list-item {
   }
 
   .header h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .content {
@@ -5202,6 +5210,10 @@ body:not(.dark-mode) .code-viewer {
   width: 32px;
   height: 32px;
   color: #6b7280;
+}
+
+.file-icon svg {
+  fill: currentColor;
 }
 
 body:not(.dark-mode) .file-icon-container {
