@@ -2922,14 +2922,14 @@ function displayFiles(status, hash) {
 
   const html = files.map(file => `
         <div class="file">
-          <div class="file-icon"></div>
+          <div class="file-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-outline</title><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" /></svg></div>
           <div class="file-path">
             <div class="file-name">${file.displayFile}</div>
             <div class="file-path-text">${file.status === 'A' ? t('file_status.added') : file.status === 'D' ? t('file_status.deleted') : t('file_status.modified')}</div>
           </div>
           <div>
-            <button class="btn" onclick="viewDiff('${file.file}', '${hash}')">${t('files.view_button')}</button>
-            <button class="btn restore" onclick="restoreFile('${file.file}', '${hash}')" title="${t('files.restore_tooltip')}">${t('files.restore_button')}</button>
+            <button class="btn-secondary" onclick="viewDiff('${file.file}', '${hash}')">${t('files.view_button')}</button>
+            <button class="btn-primary restore" onclick="restoreFile('${file.file}', '${hash}')" title="${t('files.restore_tooltip')}">${t('files.restore_button')}</button>
           </div>
         </div>
       `).join('');
@@ -3214,7 +3214,7 @@ async function displayCommitDiff(status, hash, diff, commitDate = null) {
     document.getElementById('rightPanelActions').innerHTML = `
       <button 
         id="restore-commit-btn"
-        class="btn restore" 
+        class="btn-primary restore" 
         onmousedown="handleRestoreButtonDown('${hash}', '${compareHash}')"
         onmouseup="handleRestoreButtonUp('${hash}', '${compareHash}')"
         onmouseleave="handleRestoreButtonCancel()"
@@ -3562,7 +3562,7 @@ function displayFileList(files) {
     if (item.type === 'folder') {
       html += `
             <div class="file" onclick="navigateToPath('${item.path}')">
-              <div class="file-icon"></div>
+              <div class="file-icon folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>folder-outline</title><path d="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z" /></svg></div>
               <div class="file-path">
                 <div class="file-name">${item.name}</div>
                 <div class="file-path-text">${t('files.folder_label')}</div>
@@ -3574,7 +3574,7 @@ function displayFileList(files) {
       const fileId = 'file-' + item.path.replace(/\//g, '-').replace(/\./g, '-');
       html += `
             <div class="file" onclick="showFileHistory('${item.path}')" id="${fileId}">
-              <div class="file-icon"></div>
+              <div class="file-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-outline</title><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" /></svg></div>
               <div class="file-path">
                 <div class="file-name">${item.name}</div>
                 <div class="file-path-text">${currentFilePath || 'config'}</div>
@@ -3737,8 +3737,8 @@ async function showFileHistory(filePath) {
                 <div class="history-position">1 of 1 — ${formatDateForBanner(mostRecentCommitDate)} (${mostRecentHash.substring(0, 8)})</div>
               </div>
               <div class="file-history-actions">
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">◀</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">▶</button>
               </div>
             </div>
             <div id="fileDiffContent"></div>
@@ -3801,7 +3801,7 @@ function displayAutomations(automations) {
       const autoId = 'auto-' + auto.id.replace(/[:/\.]/g, '-');
       html += `
             <div class="file" onclick="showAutomationHistory('${auto.id}')" id="${autoId}">
-              <div class="file-icon"></div>
+              <div class="file-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>robot</title><path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z" /></svg></div>
               <div class="file-path">
                 <div class="file-name">${auto.name}</div>
                 <div class="file-path-text">${auto.file}</div>
@@ -3942,7 +3942,7 @@ async function showAutomationHistory(automationId) {
       if (isFirstVersion) {
         isFirstVersion = false;
         document.getElementById('rightPanelTitle').textContent = auto ? auto.name : 'Automation';
-        document.getElementById('rightPanelActions').innerHTML = `<button class="btn restore" onclick="restoreAutomationVersion('${automationId}')" title="${t('diff.tooltip_overwrite_automation')}">${t('timeline.restore_commit')}</button>`;
+        document.getElementById('rightPanelActions').innerHTML = `<button class="btn-primary restore" onclick="restoreAutomationVersion('${automationId}')" title="${t('diff.tooltip_overwrite_automation')}">${t('timeline.restore_commit')}</button>`;
         displayAutomationHistory();
       } else {
         // Update the navigation controls for subsequent versions
@@ -3974,8 +3974,8 @@ async function showAutomationHistory(automationId) {
                 <div class="history-position">1 of 1 — ${formatDateForBanner(mostRecentCommitDate)} (${mostRecentHash.substring(0, 8)})</div>
               </div>
               <div class="file-history-actions">
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">◀</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">▶</button>
               </div>
             </div>
             <div id="automationDiffContent"></div>
@@ -4011,8 +4011,8 @@ function displayAutomationHistory() {
               <div class="history-position" id="automationHistoryPosition">1 of ${currentAutomationHistory.length}</div>
             </div>
             <div class="file-history-actions">
-              <button class="btn" id="autoPrevBtn" onclick="navigateAutomationHistory(-1)" ${currentAutomationHistoryIndex === 0 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-              <button class="btn" id="autoNextBtn" onclick="navigateAutomationHistory(1)" ${currentAutomationHistoryIndex === currentAutomationHistory.length - 1 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+              <button class="btn-primary" id="autoPrevBtn" onclick="navigateAutomationHistory(-1)" ${currentAutomationHistoryIndex === 0 ? 'disabled' : ''} style="min-width: 36px; padding: 8px 12px;">◀</button>
+              <button class="btn-primary" id="autoNextBtn" onclick="navigateAutomationHistory(1)" ${currentAutomationHistoryIndex === currentAutomationHistory.length - 1 ? 'disabled' : ''} style="min-width: 36px; padding: 8px 12px;">▶</button>
             </div>
           </div>
           <div class="diff-view-container" id="automationDiffContent"></div>
@@ -4111,7 +4111,7 @@ async function loadAutomationHistoryDiff() {
   });
 
   if ((diffHtml) || (currentSelection && currentSelection.type === 'deleted_automation')) {
-    document.getElementById('rightPanelActions').innerHTML = `<button class="btn restore" onclick="restoreAutomationVersion('${escapeHtml(currentSelection.id)}')" title="${t('diff.tooltip_overwrite_automation')}">${t('timeline.restore_commit')}</button>`;
+    document.getElementById('rightPanelActions').innerHTML = `<button class="btn-primary restore" onclick="restoreAutomationVersion('${escapeHtml(currentSelection.id)}')" title="${t('diff.tooltip_overwrite_automation')}">${t('timeline.restore_commit')}</button>`;
   } else {
     document.getElementById('rightPanelActions').innerHTML = '';
   }
@@ -4156,7 +4156,7 @@ function displayScripts(scripts) {
       const scriptId = 'script-' + script.id.replace(/[:/\.]/g, '-');
       html += `
             <div class="file" onclick="showScriptHistory('${script.id}')" id="${scriptId}">
-              <div class="file-icon"></div>
+              <div class="file-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>script-text-outline</title><path d="M15,20A1,1 0 0,0 16,19V4H8A1,1 0 0,0 7,5V16H5V5A3,3 0 0,1 8,2H19A3,3 0 0,1 22,5V6H20V5A1,1 0 0,0 19,4A1,1 0 0,0 18,5V9L18,19A3,3 0 0,1 15,22H5A3,3 0 0,1 2,19V18H13A2,2 0 0,0 15,20M9,6H14V8H9V6M9,10H14V12H9V10M9,14H14V16H9V14Z" /></svg></div>
               <div class="file-path">
                 <div class="file-name">${script.name}</div>
                 <div class="file-path-text">${script.file}</div>
@@ -4297,7 +4297,7 @@ async function showScriptHistory(scriptId) {
       if (isFirstVersion) {
         isFirstVersion = false;
         document.getElementById('rightPanelTitle').textContent = script ? script.name : 'Script';
-        document.getElementById('rightPanelActions').innerHTML = `<button class="btn restore" onclick="restoreScriptVersion('${scriptId}')" title="${t('diff.tooltip_overwrite_script')}">${t('timeline.restore_commit')}</button>`;
+        document.getElementById('rightPanelActions').innerHTML = `<button class="btn-primary restore" onclick="restoreScriptVersion('${scriptId}')" title="${t('diff.tooltip_overwrite_script')}">${t('timeline.restore_commit')}</button>`;
         displayScriptHistory();
       } else {
         // Update the navigation controls for subsequent versions
@@ -4327,8 +4327,8 @@ async function showScriptHistory(scriptId) {
                 <div class="history-position">1 of 1 — ${formatDateForBanner(mostRecentCommitDate)} (${mostRecentHash.substring(0, 8)})</div>
               </div>
               <div class="file-history-actions">
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-                <button class="btn" disabled style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">◀</button>
+                <button class="btn-secondary" disabled style=" min-width: 36px; padding: 8px 12px;">▶</button>
               </div>
             </div>
             <div id="scriptDiffContent"></div>
@@ -4363,8 +4363,8 @@ function displayScriptHistory() {
               <div class="history-position" id="scriptHistoryPosition">1 of ${currentScriptHistory.length}</div>
             </div>
             <div class="file-history-actions">
-              <button class="btn" id="scriptPrevBtn" onclick="navigateScriptHistory(-1)" ${currentScriptHistoryIndex === 0 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-              <button class="btn" id="scriptNextBtn" onclick="navigateScriptHistory(1)" ${currentScriptHistoryIndex === currentScriptHistory.length - 1 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+              <button class="btn-secondary" id="scriptPrevBtn" onclick="navigateScriptHistory(-1)" ${currentScriptHistoryIndex === 0 ? 'disabled' : ''} style="min-width: 36px; padding: 8px 12px;">◀</button>
+              <button class="btn-secondary" id="scriptNextBtn" onclick="navigateScriptHistory(1)" ${currentScriptHistoryIndex === currentScriptHistory.length - 1 ? 'disabled' : ''} style="min-width: 36px; padding: 8px 12px;">▶</button>
             </div>
           </div>
           <div class="diff-view-container" id="scriptDiffContent"></div>
@@ -4461,7 +4461,7 @@ async function loadScriptHistoryDiff() {
   });
 
   if ((diffHtml) || (currentSelection && currentSelection.type === 'deleted_script')) {
-    document.getElementById('rightPanelActions').innerHTML = `<button class="btn restore" onclick="restoreScriptVersion('${escapeHtml(currentSelection.id)}')" title="${t('diff.tooltip_overwrite_script')}">${t('timeline.restore_commit')}</button>`;
+    document.getElementById('rightPanelActions').innerHTML = `<button class="btn-primary restore" onclick="restoreScriptVersion('${escapeHtml(currentSelection.id)}')" title="${t('diff.tooltip_overwrite_script')}">${t('timeline.restore_commit')}</button>`;
   } else {
     document.getElementById('rightPanelActions').innerHTML = '';
   }
@@ -4688,8 +4688,8 @@ function displayFileHistory(filePath) {
               <div class="history-position" id="historyPosition">1 of ${currentFileHistory.length}</div>
             </div>
                                           <div class="file-history-actions">
-                                            <button class="btn" id="prevBtn" onclick="navigateFileHistory(-1)" ${currentFileHistoryIndex === 0 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">◀</button>
-                                            <button class="btn" id="nextBtn" onclick="navigateFileHistory(1)" ${currentFileHistoryIndex === currentFileHistory.length - 1 ? 'disabled' : ''} style="border: 1px solid var(--border-subtle); min-width: 36px; padding: 8px 12px;">▶</button>
+                                            <button class="btn-secondary" id="prevBtn" onclick="navigateFileHistory(-1)" ${currentFileHistoryIndex === 0 ? 'disabled' : ''} style=" min-width: 36px; padding: 8px 12px;">◀</button>
+                                            <button class="btn-secondary" id="nextBtn" onclick="navigateFileHistory(1)" ${currentFileHistoryIndex === currentFileHistory.length - 1 ? 'disabled' : ''} style=" min-width: 36px; padding: 8px 12px;">▶</button>
                                           </div>          </div>
           <div class="diff-view-container" id="fileDiffContent"></div>
         </div>
@@ -4822,7 +4822,7 @@ async function loadFileHistoryDiff(filePath) {
   // Show restore button if there are changes (regardless of comparison mode) or if it's a deleted file
   const isDeletedFile = currentSelection && currentSelection.type === 'deleted_file';
   if ((diffHtml && !isNewlyAdded) || isDeletedFile) {
-    document.getElementById('rightPanelActions').innerHTML = `<button class="btn restore" onclick="restoreFileVersion('${escapeHtml(filePath)}')" title="${t('diff.tooltip_overwrite_file')}">${t('timeline.restore_commit')}</button>`;
+    document.getElementById('rightPanelActions').innerHTML = `<button class="btn-primary restore" onclick="restoreFileVersion('${escapeHtml(filePath)}')" title="${t('diff.tooltip_overwrite_file')}">${t('timeline.restore_commit')}</button>`;
   } else {
     document.getElementById('rightPanelActions').innerHTML = '';
   }
@@ -6401,8 +6401,8 @@ function showHardResetConfirmation(hash) {
         <p>${t('restore_preview.reset_all_message', { date: formattedDate })}</p>
         
         <div class="modal-actions">
-          <button class="btn btn-secondary" onclick="closeHardResetModal()">${t('restore_preview.cancel')}</button>
-          <button class="btn btn-danger" onclick="confirmHardReset('${hash}')">${t('timeline.reset_all_files')}</button>
+          <button class="btn-secondary" onclick="closeHardResetModal()">${t('restore_preview.cancel')}</button>
+          <button class="btn-primary" onclick="confirmHardReset('${hash}')">${t('timeline.reset_all_files')}</button>
         </div>
       </div>
     </div>
@@ -6808,7 +6808,7 @@ function confirmSoftReset(commitHash, commitsToRemove) {
         
         <div class="modal-actions">
           <button class="btn btn-secondary" onclick="closeSoftResetDialog()">Cancel</button>
-          <button class="btn restore" onclick="executeSoftReset('${commitHash}')">Reset Timeline</button>
+          <button class="btn-primary restore" onclick="executeSoftReset('${commitHash}')">Reset Timeline</button>
         </div>
       </div>
     </div>
